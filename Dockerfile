@@ -46,6 +46,7 @@ RUN set -ex \
     && rm domoticz.tgz \
     && mkdir -p /opt/domoticz/userdata \
     && rm -rf /var/lib/apt/lists/* \
+    && ls -l /usr/bin \
     && ln -s /usr/bin/pip3 /usr/bin/pip \
     && pip3 install setuptools requests
 
