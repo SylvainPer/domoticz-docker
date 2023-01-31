@@ -13,7 +13,7 @@ fi
 
 declare $(cat version.h | awk '{print $2"="$3}')
 RELEASE_DATE="$(date -d @$APPDATE -u +"%Y-%m-%dT%H:%M:%SZ")"
-STABLE_VERSION=2021.1
+STABLE_VERSION=2022.2
 echo "Building release $STABLE_VERSION.$APPVERSION from commit $APPHASH ($RELEASE_DATE)";
 
 # Remove double quotes in APPHASH
@@ -25,4 +25,4 @@ docker buildx rm domoticz_build >/dev/null 2>&1 || true
 docker buildx create --name domoticz_build
 docker buildx use domoticz_build
 docker buildx inspect --bootstrap
-echo "docker buildx build --push --no-cache --platform ${BUILDX_PLATFORMS} --build-arg APP_VERSION=$APPVERSION --build-arg APP_HASH=$APPHASH --build-arg BUILD_DATE=$RELEASE_DATE --build-arg STABLE=true --tag domoticz/domoticz:latest-stable --tag domoticz/domoticz:$STABLE_VERSION-stable ."
+echo "docker buildx build --push --no-cache --platform ${BUILDX_PLATFORMS} --build-arg APP_VERSION=$APPVERSION --build-arg APP_HASH=$APPHASH --build-arg BUILD_DATE=$RELEASE_DATE --build-arg STABLE=true --tag domoticz/domoticz:stable --tag domoticz/domoticz:$STABLE_VERSION ."
